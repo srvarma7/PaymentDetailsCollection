@@ -11,13 +11,14 @@ struct CardView: View {
     
     var cardDetails: CardModel = CardModel()
     @Binding var isShowingFront: Bool
+    var inputScore: Int
     
     var body: some View {
         VStack {
             VStack {
                 Group {
                     if isShowingFront {
-                        CardFrontView(card: cardDetails, statusImage: "icloud.fill")
+                        CardFrontView(card: cardDetails, inputScore: inputScore)
                     } else {
                         CardRearView(name: cardDetails.name, cvv: cardDetails.cvv)
                     }
@@ -41,6 +42,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(cardDetails: CardModel(), isShowingFront: .constant(true))
+        CardView(cardDetails: CardModel(), isShowingFront: .constant(true), inputScore: 0)
     }
 }

@@ -12,6 +12,24 @@ struct ContentView: View {
     @State var cardDetails: CardModel = CardModel()
     @State var isShowingFront = true
     @State var showAlert: Bool = false
+    @State var score: Int = 0
+    
+    private func calculateScore() {
+        score = 0
+        if cardDetails.name == "" {
+            score += 1
+        }
+        if cardDetails.number == "" {
+            score += 1
+        }
+        if cardDetails.expiry == "" {
+            score += 1
+        }
+        if cardDetails.cvv == "" {
+            score += 1
+        }
+        //return score
+    }
     
     var body: some View {
         
@@ -19,15 +37,23 @@ struct ContentView: View {
             
             Spacer()
             
-            CardView(cardDetails: cardDetails, isShowingFront: $isShowingFront)
+            CardView(cardDetails: cardDetails, isShowingFront: $isShowingFront, inputScore: score)
             
             Form {
-                TextField("Card number", text: $cardDetails.number)
                 
-                TextField("Name on the card", text: $cardDetails.name)
+                TextField("Card number", text: $cardDetails.number) { (editingChanged) in
+                    calculateScore()
+                }
+                
+                TextField("Name on the card", text: $cardDetails.name) { (editingChanged) in
+                    calculateScore()
+                }
                 
                 HStack {
-                    TextField("Expiry date", text: $cardDetails.expiry)
+                    
+                    TextField("Expiry date", text: $cardDetails.expiry) { (editingChanged) in
+                        calculateScore()
+                    }
                         .frame(width: 220)
                     
                     Text("|")
@@ -40,6 +66,7 @@ struct ContentView: View {
                                                            damping: 10,
                                                            initialVelocity: 0)) {
                             self.isShowingFront.toggle()
+                            calculateScore()
                         }
                     }
                 }

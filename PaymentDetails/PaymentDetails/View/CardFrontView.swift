@@ -10,23 +10,40 @@ import SwiftUI
 struct CardFrontView: View {
     
     var card: CardModel
-    let statusImage: String
+    var inputScore: Int
     
-    let empty = "icloud"
-    let start = "star"
-    let startHalf = "star.lefthalf.fill"
-    let startFill = "star.fill"
+    private func imageName() -> String {
+        switch inputScore {
+            case 0  : return "checkmark.seal.fill"
+            case 1  : return "checkmark.seal"
+            case 2  : return "doc.text.fill"
+            case 3  : return "doc.text"
+            case 4  : return "pencil.tip"
+            default : return "heart.fill"
+        }
+    }
+    
+    private func imageColor() -> Color {
+        switch inputScore {
+            case 4  : return Color.white
+            case 3  : return Color.orange
+            case 2  : return Color.yellow
+            case 1  : return Color.orange
+            case 0  : return Color.green
+            default : return Color.red
+        }
+    }
     
     var body: some View {
         
         VStack(alignment: .leading) {
             
             HStack {
-                Image(systemName: statusImage)
+                Image(systemName: imageName())
                     .resizable()
                     .scaledToFit()
-                    .foregroundColor(.white)
-                    .frame(width: 30)
+                    .foregroundColor(imageColor())
+                    .frame(width: 20)
                 
                 Spacer()
                 
@@ -81,6 +98,6 @@ struct CardFrontView: View {
 
 struct CardFrontView_Previews: PreviewProvider {
     static var previews: some View {
-        CardFrontView(card: CardModel(), statusImage: "icloud")
+        CardFrontView(card: CardModel(), inputScore: 0)
     }
 }
