@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardFrontView: View {
     
-    @Binding var card: CardModel
+    var card: CardModel
     let statusImage: String
     
     let empty = "icloud"
@@ -81,8 +81,6 @@ struct CardFrontView: View {
 
 struct CardFrontView_Previews: PreviewProvider {
     static var previews: some View {
-        //let card = CardModel(number: "", name: "", expiry: "", cvv: "")
-        let card = CardModel(number: "**** **** **** 1234", name: "Raghu", expiry: "20/20", cvv: "123")
-        CardFrontView(card: .constant(card), statusImage: "icloud")
+        CardFrontView(card: CardModel(), statusImage: "icloud")
     }
 }

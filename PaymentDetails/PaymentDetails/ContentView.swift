@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var cardDetails: CardModel = CardModel()
+    @State var isShowingFront = true
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        CardView(cardDetails: cardDetails, isShowingFront: $isShowingFront)
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(cardDetails: CardModel())
     }
 }
