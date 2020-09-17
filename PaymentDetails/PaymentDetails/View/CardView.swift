@@ -19,7 +19,7 @@ struct CardView: View {
                     if isShowingFront {
                         CardFrontView(card: cardDetails, statusImage: "icloud.fill")
                     } else {
-                        CardRearView(name: "", cvv: "")
+                        CardRearView(name: cardDetails.name, cvv: cardDetails.cvv)
                     }
                 }
             }

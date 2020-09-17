@@ -9,8 +9,8 @@ import Foundation
 
 struct CardModel {
     
-    let number: String = ""
-    let name: String = ""
-    let expiry: String = ""
-    let cvv: String = ""
+    var number: String = ""
+    var name: String = ""
+    var expiry: String = ""
+    var cvv: String = ""
 }

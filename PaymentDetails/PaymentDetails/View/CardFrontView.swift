@@ -52,7 +52,7 @@ struct CardFrontView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                     
-                    Text(card.name == "" ? "Enter name on card" : card.name)
+                    Text(card.name == "" ? "Enter name" : card.name)
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -65,7 +65,7 @@ struct CardFrontView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                     
-                    Text(card.expiry == "" ? "Enter expiry date" : card.expiry)
+                    Text(card.expiry == "" ? "Expiry date" : card.expiry)
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
