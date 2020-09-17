@@ -31,6 +31,7 @@ struct ContentView: View {
         }
     }
     
+    
     var body: some View {
         
         VStack {
@@ -48,8 +49,11 @@ struct ContentView: View {
                     calculateScore()
                 }.keyboardType(.numberPad)
                 .onReceive(Just(self.cardDetails.number)) { inputValue in
+                    
+                    cardDetails.number = cardDetails.number.grouping(every: 4, with: "-")
+                    
                     // With a little help from https://bit.ly/2W1Ljzp
-                    if inputValue.count > 16 {
+                    if inputValue.count > 20 {
                         self.cardDetails.number.removeLast()
                     }
                 }
@@ -66,8 +70,9 @@ struct ContentView: View {
                     }.keyboardType(.numberPad)
                     .frame(width: 220)
                     .onReceive(Just(self.cardDetails.expiry)) { inputValue in
+                        cardDetails.expiry = cardDetails.expiry.grouping(every: 2, with: "/")
                         // With a little help from https://bit.ly/2W1Ljzp
-                        if inputValue.count > 4 {
+                        if inputValue.count > 5 {
                             self.cardDetails.expiry.removeLast()
                         }
                     }
