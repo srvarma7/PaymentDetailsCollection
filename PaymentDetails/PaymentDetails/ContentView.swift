@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
     
@@ -28,7 +29,6 @@ struct ContentView: View {
         if cardDetails.cvv == "" {
             score += 1
         }
-        //return score
     }
     
     var body: some View {
@@ -38,23 +38,39 @@ struct ContentView: View {
             Spacer()
             
             CardView(cardDetails: cardDetails, isShowingFront: $isShowingFront, inputScore: score)
+                .onAppear(perform: {
+                    calculateScore()
+                })
             
             Form {
                 
-                TextField("Card number", text: $cardDetails.number) { (editingChanged) in
+                TextField("Card number", text: $cardDetails.number) { (onChanged) in
                     calculateScore()
+                }.keyboardType(.numberPad)
+                .onReceive(Just(self.cardDetails.number)) { inputValue in
+                    // With a little help from https://bit.ly/2W1Ljzp
+                    if inputValue.count > 16 {
+                        self.cardDetails.number.removeLast()
+                    }
                 }
                 
                 TextField("Name on the card", text: $cardDetails.name) { (editingChanged) in
                     calculateScore()
-                }
+                }.keyboardType(.alphabet)
+                .autocapitalization(.allCharacters)
                 
                 HStack {
                     
                     TextField("Expiry date", text: $cardDetails.expiry) { (editingChanged) in
                         calculateScore()
+                    }.keyboardType(.numberPad)
+                    .frame(width: 220)
+                    .onReceive(Just(self.cardDetails.expiry)) { inputValue in
+                        // With a little help from https://bit.ly/2W1Ljzp
+                        if inputValue.count > 4 {
+                            self.cardDetails.expiry.removeLast()
+                        }
                     }
-                        .frame(width: 220)
                     
                     Text("|")
                         .foregroundColor(.gray)
@@ -69,19 +85,29 @@ struct ContentView: View {
                             calculateScore()
                         }
                     }
+                    .keyboardType(.numberPad)
+                    .onReceive(Just(self.cardDetails.cvv)) { inputValue in
+                        // With a little help from https://bit.ly/2W1Ljzp
+                        if inputValue.count > 3 {
+                            self.cardDetails.cvv.removeLast()
+                        }
+                    }
                 }
             }.frame(width: UIScreen.main.bounds.width, height: 200)
+            .onTapGesture {
+                calculateScore()
+            }
             
             Button("Proceed", action: {
                 self.showAlert.toggle()
             }).alert(isPresented: $showAlert) {
                 Alert(
-                  title: Text("Are you sure?"),
-                  message: Text("Do you want to proceed the payment?"),
-                  primaryButton: .destructive(Text("Yes"), action: {
-                  }),
-                  secondaryButton: .cancel(Text("No"), action: {
-                  })
+                    title: Text("Are you sure?"),
+                    message: Text("Do you want to proceed the payment?"),
+                    primaryButton: .destructive(Text("Yes"), action: {
+                    }),
+                    secondaryButton: .cancel(Text("No"), action: {
+                    })
                 )
             }
             .foregroundColor(.white)
