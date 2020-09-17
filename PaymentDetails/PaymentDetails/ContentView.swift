@@ -45,6 +45,23 @@ struct ContentView: View {
                 }
             }.frame(width: UIScreen.main.bounds.width, height: 200)
             
+            Button("Proceed", action: {
+                self.showAlert.toggle()
+            }).alert(isPresented: $showAlert) {
+                Alert(
+                  title: Text("Are you sure?"),
+                  message: Text("Do you want to proceed the payment?"),
+                  primaryButton: .destructive(Text("Yes"), action: {
+                  }),
+                  secondaryButton: .cancel(Text("No"), action: {
+                  })
+                )
+            }
+            .foregroundColor(.white)
+            .padding()
+            .background(Color.green)
+            .cornerRadius(10.0)
+            Spacer()
         }
         .background(Color.white)
         .ignoresSafeArea()
