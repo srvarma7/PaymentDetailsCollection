@@ -73,6 +73,7 @@ struct CardFrontView: View {
         .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .leading, endPoint: .trailing))
     }
     
+    
     private func imageName() -> String {
         switch inputScore {
             case 0  : return "checkmark.seal.fill"

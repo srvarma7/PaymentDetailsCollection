@@ -26,7 +26,7 @@ struct CardView: View {
             }
             .rotation3DEffect(
                 .degrees(isShowingFront ? 360 : .zero),
-                axis: (x: 1.0, y: 1.0, z: 0))
+                axis: (x: 1.0, y: 1.0, z: 1.0))
         }
         .onTapGesture(count: 1, perform: {
             withAnimation(.interpolatingSpring(mass: 1,
