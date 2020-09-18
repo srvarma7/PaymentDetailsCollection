@@ -12,28 +12,6 @@ struct CardFrontView: View {
     var card: CardModel
     var inputScore: Int
     
-    private func imageName() -> String {
-        switch inputScore {
-            case 0  : return "checkmark.seal.fill"
-            case 1  : return "checkmark.seal"
-            case 2  : return "doc.text.fill"
-            case 3  : return "doc.text"
-            case 4  : return "pencil.tip"
-            default : return "heart.fill"
-        }
-    }
-    
-    private func imageColor() -> Color {
-        switch inputScore {
-            case 4  : return Color.white
-            case 3  : return Color.orange
-            case 2  : return Color.yellow
-            case 1  : return Color.orange
-            case 0  : return Color.green
-            default : return Color.red
-        }
-    }
-    
     var body: some View {
         
         VStack(alignment: .leading) {
@@ -65,7 +43,7 @@ struct CardFrontView: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text("Card Holder Name")
-                        .font(.title3)
+                        .font(.system(size: 15))
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                     
@@ -78,7 +56,7 @@ struct CardFrontView: View {
                 
                 VStack(alignment: .trailing) {
                     Text("Expiry")
-                        .font(.title3)
+                        .font(.system(size: 15))
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                     
@@ -93,6 +71,28 @@ struct CardFrontView: View {
         .padding()
         .frame(width: 400, height: 260, alignment: .center)
         .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .leading, endPoint: .trailing))
+    }
+    
+    private func imageName() -> String {
+        switch inputScore {
+            case 0  : return "checkmark.seal.fill"
+            case 1  : return "checkmark.seal"
+            case 2  : return "doc.text.fill"
+            case 3  : return "doc.text"
+            case 4  : return "pencil.tip"
+            default : return "heart.fill"
+        }
+    }
+    
+    private func imageColor() -> Color {
+        switch inputScore {
+            case 4  : return Color.white
+            case 3  : return Color.orange
+            case 2  : return Color.yellow
+            case 1  : return Color.orange
+            case 0  : return Color.green
+            default : return Color.red
+        }
     }
 }
 

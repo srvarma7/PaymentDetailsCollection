@@ -31,14 +31,12 @@ struct ContentView: View {
         }
     }
     
-    
     var body: some View {
         
         VStack {
             
-            Spacer()
-            
             CardView(cardDetails: cardDetails, isShowingFront: $isShowingFront, inputScore: score)
+                .padding(.top, 50)
                 .onAppear(perform: {
                     calculateScore()
                 })

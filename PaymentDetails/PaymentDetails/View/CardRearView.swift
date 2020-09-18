@@ -29,7 +29,7 @@ struct CardRearView: View {
                 VStack(alignment: .leading) {
                     
                     Text("Signature")
-                        .font(.title3)
+                        .font(.system(size: 15))
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                         .padding([.leading], 10)
@@ -49,7 +49,7 @@ struct CardRearView: View {
                 VStack(alignment: .trailing) {
                     
                     Text("CVV")
-                        .font(.title3)
+                        .font(.system(size: 15))
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                         .padding([.bottom], 0.2)
@@ -57,8 +57,8 @@ struct CardRearView: View {
                     Text(cvv == "" ? "---" : cvv)
                         .font(.title3)
                         .fontWeight(.bold)
-                        .padding(.trailing, 0.2)
-                        .frame(width: 50, height: 40, alignment: .leading)
+                        .padding(.trailing, 10)
+                        .frame(width: 50, height: 40, alignment: .trailing)
                         .background(Color.gray)
                         .foregroundColor(.white)
                     
